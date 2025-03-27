@@ -1,6 +1,6 @@
 package com.sistemaPonto.sistemaDePonto.entidades;
 
-public class registro {
+public class Registro {
     private String hora;
     private String data;
 
