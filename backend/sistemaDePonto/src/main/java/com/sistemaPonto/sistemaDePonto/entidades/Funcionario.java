@@ -1,6 +1,6 @@
 package com.sistemaPonto.sistemaDePonto.entidades;
 
-public class Funcionarios {
+public class Funcionario {
     private String nome;
     private String cargo;
     private int id;
