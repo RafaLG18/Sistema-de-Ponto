@@ -1,9 +1,13 @@
 package com.sistemaPonto.sistemaDePonto.entidades;
 
-public class registro {
+public class Registro {
     private String hora;
     private String data;
+    private int id_funcionario;
 
+    public void setIdFuncioraio(int input){
+        this.id_funcionario=input;
+    };
     public void setHora(String input){
         this.hora=input;
     };
@@ -16,5 +20,8 @@ public class registro {
     };
     public String getData(){
         return this.data;
+    };
+    public int getIdFuncioraio(){
+        return this.id_funcionario;
     };
 }

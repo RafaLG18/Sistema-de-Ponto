@@ -1,12 +1,12 @@
 CREATE TABLE "funcionario"(
-    "id" INTEGER NOT NULL,
-    "Nome" VARCHAR(255) NOT NULL,
-    "Cargo" VARCHAR(255) NOT NULL
+    "id" SERIAL NOT NULL,
+    "nome" VARCHAR(255) NOT NULL,
+    "cargo" VARCHAR(255) NOT NULL
 );
 ALTER TABLE
     "funcionario" ADD PRIMARY KEY("id");
 CREATE TABLE "registro"(
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "id_funcionario" INTEGER NOT NULL,
     "data_registro" VARCHAR(255) NOT NULL,
     "hora_chegada" VARCHAR(255) NOT NULL

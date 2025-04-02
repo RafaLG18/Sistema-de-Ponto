@@ -1,9 +1,13 @@
 package com.sistemaPonto.sistemaDePonto.entidades;
 
-public class funcionarios {
+public class Funcionario {
     private String nome;
     private String cargo;
+    private int id;
 
+    public void setId(int id){
+        this.id=id;
+    }
     public void setNome(String input){
         this.nome=input;
 
@@ -18,4 +22,7 @@ public class funcionarios {
     public String getCargo(){
         return this.cargo;
     };
+    public int getId(){
+        return this.id;
+    }
 }
