@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funcionários na Portaria</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        /* Estiliza os cards para ficarem lado a lado */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        .card {
+            cursor: pointer; /* Indica que é clicável */
+            transition: transform 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body onload="loadPage()">
+  <div id="alerta"></div>
+    <div class="container mt-5">
+        <h2 class="text-center">Entrada de funcionarios</h2>
+        <div id="cardContainer" class="card-container mt-4"></div>
+    </div>
+
+    <!-- Modal para Detalhes do Funcionário -->
+    <div class="modal fade" id="modalRegistro" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Registro de chegada do funcionario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="#" formSubmitter="POST">
+                      <table class="table">
+                          <tr>
+                              <td>Data</td>
+                              <td><input id="data_chegada" type="text" name="data" class="form-control" /></td>
+                          </tr>
+                          <tr>
+                              <td>Hora</td>
+                              <td><input id="hora_chegada" type="text" name="hora" class="form-control" /></td>
+                          </tr>
+                      </table>
+                      <button class="btn btn-success">Cadastrar</button>
+                  </form>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      document.querySelectorAll("[formSubmitter]").forEach(el => {
+            el.addEventListener("submit", function (event) {
+
+                event.preventDefault()
+
+                const form = new FormData(event.target)
+
+                const registro = {}
+
+                const metodo = event.target.getAttribute("formSubmitter")
+                const id=sessionStorage.getItem("id")
+                
+                for ([key, value] of form) {
+                    registro[key] = value
+                } 
+                registro["id_funcionario"]=parseInt(id)
+
+                console.log(JSON.stringify(registro))
+                
+
+                fetch("http://localhost:8080/Entrada", {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "POST",
+                    body: JSON.stringify(registro)
+                }).then(response => {
+                    if (response.status === 200) {
+                        const alerta = document.getElementById("alerta")
+                    
+                        console.log(response.text())
+
+                        location.reload()
+                    }
+                })
+            })
+        })
+        function loadPage() {
+            fetch("http://127.0.0.1:8080/Entrada", {
+              method: "GET",
+              headers: { "Content-type": "application/json" },
+            })
+            .then(response => response.json())
+            .then(json => {
+                const container = document.getElementById("cardContainer");
+                container.innerHTML = ""; // Limpa os cards anteriores
+
+                json.forEach((funcionario) => {
+                    // Criando os elementos do card
+                    const card = document.createElement("div");
+                    card.className = "card p-3 shadow-sm";
+                    card.style.width = "18rem";
+
+                    const cardBody = document.createElement("div");
+                    cardBody.className = "card-body";
+
+                    const cardTitle = document.createElement("h5");
+                    cardTitle.className = "card-title";
+                    cardTitle.textContent = funcionario.nome;
+
+                    // Adiciona evento de clique para exibir o modal
+                    card.addEventListener("click", function() {
+                        sessionStorage.setItem("id",funcionario.id)
+                        const modal = new bootstrap.Modal(document.getElementById("modalRegistro"));
+                        modal.show();
+
+                    });
+
+                    // Monta a estrutura do card
+                    cardBody.appendChild(cardTitle);
+                    card.appendChild(cardBody);
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => console.error("Erro ao carregar funcionários:", error));
+        }
+        // FALTA FAZER: 
+        // Adicionar ID do funcionário na tabela do modal.
+    </script>
+
+</body>
+</html>

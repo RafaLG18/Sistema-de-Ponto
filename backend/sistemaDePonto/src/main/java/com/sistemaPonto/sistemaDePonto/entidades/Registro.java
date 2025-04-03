@@ -5,8 +5,8 @@ public class Registro {
     private String data;
     private int id_funcionario;
 
-    public void setIdFuncioraio(int input){
-        this.id_funcionario=input;
+    public void setIdFuncionario(int id_funcionario){
+        this.id_funcionario=id_funcionario;
     };
     public void setHora(String input){
         this.hora=input;
@@ -21,7 +21,7 @@ public class Registro {
     public String getData(){
         return this.data;
     };
-    public int getIdFuncioraio(){
+    public int getIdFuncionario(){
         return this.id_funcionario;
     };
 }

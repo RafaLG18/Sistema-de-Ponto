@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import com.sistemaPonto.sistemaDePonto.respositorios.RepositorioRegistroFunciona
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8081")
 @RequestMapping("/Cadastro")
 public class CadastroController {
     @PostMapping
@@ -26,7 +28,7 @@ public class CadastroController {
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Erro ao cadastrar o orcamento, contate o desenvolvedor");
+                    "Erro ao cadastrar o funcionario, contate o desenvolvedor");
         }
     }
 }

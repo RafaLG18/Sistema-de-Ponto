@@ -13,7 +13,7 @@ public class RepositorioRegistro {
     public void insert(Registro registro) throws SQLException{
         String sql = "insert into registro (id_funcionario,data_registro, hora_chegada) " + "values(?,?,?)";
         try (PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql)) {
-            pstm.setInt(1, registro.getIdFuncioraio());
+            pstm.setInt(1, registro.getIdFuncionario());
             pstm.setString(2, registro.getData());
             pstm.setString(3, registro.getHora());
             pstm.execute();
@@ -30,10 +30,11 @@ public class RepositorioRegistro {
                 Registro registro=new Registro();
 
                 String data = query.getString("data_registro");
-                String hora = query.getString("hora_registro");
+                String hora = query.getString("hora_chegada");
                 
                 registro.setData(data);
                 registro.setHora(hora);
+                registro.setIdFuncionario(id_funcionario);
 
                 registrosDB.add(registro);
             }
