@@ -21,7 +21,7 @@ public class RespositorioFuncionario {
     
     // Insere dados de funcionário no banco
     public void insert(Funcionario funcionario) throws SQLException{
-        String sql = "insert into funcionarios (nome, cargo) " + "values(?,?)";
+        String sql = "insert into funcionario (nome, cargo) " + "values(?,?)";
         try (PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql)) {
             pstm.setString(1, funcionario.getNome());
             pstm.setString(2, funcionario.getCargo());
@@ -32,7 +32,7 @@ public class RespositorioFuncionario {
     public List<Funcionario> GetFuncionariosList() throws SQLException{
         
         List<Funcionario> funcionariosDB=new ArrayList<Funcionario>();
-        String sql = "select * from funcionarios";
+        String sql = "select * from funcionario";
         try (PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql)) {
             ResultSet query = pstm.executeQuery();
             while (query.next()) {
@@ -51,12 +51,6 @@ public class RespositorioFuncionario {
             return funcionariosDB;
         }
     }
-    
-    /*************************************************/
-    /*
-     * Metodos para manipulação dos Repositório Registro
-     */
-    /**
-     ************************************************/
+ 
 
 }

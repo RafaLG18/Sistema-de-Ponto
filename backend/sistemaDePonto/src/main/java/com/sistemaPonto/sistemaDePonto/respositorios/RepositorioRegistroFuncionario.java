@@ -30,7 +30,10 @@ public class RepositorioRegistroFuncionario {
         this.funcionario.insert(funcionario);
     }
 
-    public void insert(Registro registro) throws SQLException {
+    public void insertRegistro(Registro registro) throws SQLException {
+        System.out.println(registro.getIdFuncionario());
+        System.out.println(registro.getData());
+        System.out.println(registro.getHora());
         this.registro.insert(registro);
     }
 
