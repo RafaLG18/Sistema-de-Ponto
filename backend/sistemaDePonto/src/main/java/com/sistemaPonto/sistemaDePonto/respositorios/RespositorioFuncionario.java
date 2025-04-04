@@ -51,12 +51,6 @@ public class RespositorioFuncionario {
             return funcionariosDB;
         }
     }
-    
-    /*************************************************/
-    /*
-     * Metodos para manipulação dos Repositório Registro
-     */
-    /**
-     ************************************************/
+ 
 
 }
