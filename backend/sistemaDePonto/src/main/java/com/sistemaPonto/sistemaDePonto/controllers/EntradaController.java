@@ -30,9 +30,6 @@ public class EntradaController {
     }
     @PostMapping
     public ResponseEntity<?> CadastroRegistro(@RequestBody Registro registro) throws SQLException {
-        System.out.println("Recebido no backend: " + registro.getIdFuncionario());
-        System.out.println("Recebido no backend: " + registro.getData());
-        System.out.println("Recebido no backend: " + registro.getHora());
         try {
             RepositorioRegistroFuncionario.getMyInstance().insertRegistro(registro);
             return ResponseEntity.ok().build();
